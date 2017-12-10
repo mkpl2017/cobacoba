@@ -31,6 +31,8 @@
         <!-- responsive css -->
         <link rel="stylesheet" href="<?php echo base_url();?>/asset/css/responsive.css">
         
+
+        
         <!-- Template Javascript Files
         ================================================== -->
         <!-- modernizr js -->
@@ -49,6 +51,13 @@
         <script src="<?php echo base_url();?>/asset/js/jquery.fancybox.js"></script>
         <!-- template main js -->
         <script src="<?php echo base_url();?>/asset/js/main.js"></script>
+
+        <!-- Script TinyMCE -->
+        <script src="<?php echo base_url(); ?>asset/tinymce/js/tinymce/tinymce.dev.js"></script>
+        <script src="<?php echo base_url(); ?>asset/tinymce/js/tinymce/plugins/table/plugin.dev.js"></script>
+        <script src="<?php echo base_url(); ?>asset/tinymce/js/tinymce/plugins/paste/plugin.dev.js"></script>
+        <script src="<?php echo base_url(); ?>asset/tinymce/js/tinymce/plugins/spellchecker/plugin.dev.js"></script>
+        <!-- End Script TinyMCE -->
     </head>
     <body>
         <!--
@@ -69,7 +78,7 @@
                     
                     <!-- logo -->
                     <div class="navbar-brand">
-                        <a href="<?php echo base_url(); ?>authentifikasi" >
+                        <a href="<?php echo base_url();?>authentifikasi">
                             <img src="<?php echo base_url(); ?>asset/image/logo.png" alt="">
                         </a>
                     </div>
@@ -90,11 +99,12 @@
             </div>
         </header>
         
-        <!--
+
+    	<!--
         ==================================================
-        List of Article Section Start
+        Edit Article Section Start
         ================================================== -->
-		
+
         <section class="global-page-header">
             <div class="container">
                 <div class="row">
@@ -108,7 +118,7 @@
                                         Home
                                     </a>
                                 </li>
-                                <li class="active">Daftar Artikel</li>
+                                <li class="active">Edit Artikel</li>
                             </ol>
                         </div>
                     </div>
@@ -116,41 +126,39 @@
             </div>
         </section><!--/#Page header-->
 
-        <section class="single-post">
+         <section class="single-post">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div align="right">
-                                <a href="<?php echo base_url() ?>artikelpar/tambahartikelpar" class="tambah">Tambah Artikel</a>
-                            </div>
+                            <?php require_once('tinymce.php') ?>
+                            <?php echo validation_errors(); ?>
+                            <form name="form1" method="post" action="<?php echo base_url(); ?>artikelpar/editartikelpar" class="myform">
+                                <p><label for="judul">ID User</label>
+                                    <input name="idUser" type="text" id="idUser" size="70" value="<?php echo $detail['idUser'] ?>">
+                                </p>
+                                <p><label for="judul">Judul Artikel</label>
+                                    <input name="judul" type="text" id="judul" size="70" value="<?php echo $detail['judul'] ?>">
+                                </p>
+                                <p>
+                                    <label for="ringkasan">Ringkasan Artikel</label>
+                                    <textarea name="ringkasan" id="ringkasan" cols="45" rows="5"><?php echo $detail['ringkasan'] ?></textarea>
+                                </p>
+                                <p>
+                                    <label for="isi">Isi Artikel</label>
+                                    <textarea name="isi" id="isi" cols="45" rows="5"><?php echo $detail['isi'] ?></textarea>
+                                </p>
+                                <p>
 
-                			<p>DAFTAR ARTIKEL PARIWISATA</p>
-                			<table  id="table" class="table table-hover table-mc-light-blue">
-                				<tr>
-                					<th scope="col">Judul</th>
-                					<th scope="col">id User</th>
-                					<th scope="col">Tanggal</th>
-                					<th scope="col">&nbsp;</th>
-                				</tr>
-
-                				<?php foreach($artikel as $row) { ?>
-                				<tr>
-                					<td>
-                						<a href="<?php echo base_url();?>artikelpar/readartikelpar/<?php echo $row->idArtikelPar ?>" target="_blank">
-                							<?php echo $row->judul; ?></a>
-                					</td>
-                					<td><?php echo $row->idUser ?></td>
-                					<td><?php echo $row->tanggal; ?></td>
-                					<td>
-                						<a href="<?php echo base_url();?>artikelpar/editartikelpar/<?php echo $row->idArtikelPar ?>">EDIT</a> | <a href="<?php echo base_url();?>artikelpar/hapusartikelpar/<?php echo $row->idArtikelPar ?>" onclick="return confirm('Apakah yakin Data Ingin Di Hapus?')">DELETE</a>
-                					</td>
-                				</tr>
-                				<?php } ?>
-                			</table>
-                		</div>
+                                    <input name="idArtikelPar" type="hidden" id="idArtikelPar" value="<?php echo $detail['idArtikelPar'] ?>">
+                                </p>
+                                <p>
+                                    <input type="submit" name="submit" id="submit" value="Submit">
+                                </p>
+                            </form>
+                        </div>
                     </div>
                 </div>
-             </section>  
+            </section>  
 
 		<!--
 	    ==================================================
