@@ -142,7 +142,7 @@
                 					<td><?php echo $row->idUser ?></td>
                 					<td><?php echo $row->tanggal; ?></td>
                 					<td>
-                					<!-- 	<a href="<?php echo base_url();?>artikelpar/editartikelpar/<?php echo $row->idArtikelPar ?>">EDIT</a> | --> <a href="<?php echo base_url();?>artikelpar/hapusartikelpar/<?php echo $row->idArtikelPar ?>" onclick="return confirm('Apakah yakin Data Ingin Di Hapus?')">DELETE</a>
+                						<a href="<?php echo base_url();?>artikelpar/editartikelpar/<?php echo $row->idArtikelPar ?>">EDIT</a> | <a href="<?php echo base_url();?>artikelpar/hapusartikelpar/<?php echo $row->idArtikelPar ?>" onclick="return confirm('Apakah yakin Data Ingin Di Hapus?')">DELETE</a>
                 					</td>
                 				</tr>
                 				<?php } ?>
