@@ -43,6 +43,37 @@ class ArtikelPar extends CI_Controller {
 			}
 		}
 	
+	// Kode untuk menampilkan halaman edit dan meng-update artikel
+	public function editArtikelPar($idArtikelPar) {
+		$this->form_validation->set_rules('judul', 'Judul', 'required');
+		$this->form_validation->set_rules('ringkasan', 'Ringkasan', 'required');
+		$this->form_validation->set_rules('isi', 'Isi Artikel','required');
+
+		if ($this->form_validation->run() === FALSE) {
+			$data['artikelpar']	= $this->artikelpar_model->detailArtikelPar();
+			$data['detail']		= $this->artikelpar_model->detailArtikelPar($idArtikelPar);
+			$data = array (
+				'title' 	    => 'Update Artikel : '.$data['detail']['judul'],
+				'artikelpar'	=> $this->artikelpar_model->detailArtikelPar(),
+				'detail'	    => $this->artikelpar_model->detailArtikelPar($idArtikelPar),
+				'isi'		    => 'admin/ArtikelPar/viewEditArtikelPar'
+				);
+			$this->load->view('admin/ArtikelPar/viewEditArtikelPar', $data);
+			// Jika tidak terjadi error maka artikel akan diupdate
+		}else {
+			$data = array (
+				'idArtikelPar' 		=> $this->input->post('idArtikelPar'),
+				'judul'				=> $this->input->post('judul'),
+				'ringkasan'			=> $this->input->post('ringkasan'),
+				'isi'				=> $this->input->post('isi'),
+				'idUser'			=> $this->input->post('idUser')
+				);
+
+			$this->artikelpar_model->updateArtikelPar($data);
+			redirect(base_url().'artikelpar/index');
+		}		
+	}
+
 
 	// Kode untuk menghapus artikel
 	public function hapusArtikelPar($idArtikelPar) {
