@@ -144,7 +144,7 @@
                                     <td><?php echo $row->idUser ?></td>
                                     <td><?php echo $row->tanggal ?></td>
                                     <td>
-                                        <a href="<?php echo base_url();?>artikelkebsej/editartikelkebsej/<?php echo $row->idArtikelKS ?>">EDIT</a> | <a href="<?php echo base_url();?>artikelkebsej/hapusartikelkebsej/<?php echo $row->idArtikelKS ?>" onclick="return confirm('Apakah yakin Data Ingin Di Hapus?')">DELETE</a>
+                                        <a href="<?php echo base_url();?>artikelkebsej/editartikelkebsej/<?php echo $row->idArtikelKS ?>">EDIT</a> || <a href="<?php echo base_url();?>artikelkebsej/hapusartikelkebsej/<?php echo $row->idArtikelKS ?>" onclick="return confirm('Apakah yakin Data Ingin Di Hapus?')">DELETE</a>
                                     </td>
                                 </tr>
                                 <?php } ?>
