@@ -42,6 +42,39 @@ class ArtikelKebSej extends CI_Controller {
 			}
 		}
 	
+	// Kode untuk menampilkan halaman edit dan meng-update artikel
+	public function editArtikelKebsej($idArtikelKS) {
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('judul', 'Judul', 'required');
+		$this->form_validation->set_rules('ringkasan', 'Ringkasan', 'required');
+		$this->form_validation->set_rules('isi', 'Isi Artikel','required');
+
+		if ($this->form_validation->run() === FALSE) {
+			$data['artikelkebsej']	= $this->artikelkebsej_model->detailArtikelKebSej();
+			$data['detail']		= $this->artikelkebsej_model->detailArtikelKebSej($idArtikelKS);
+			$data = array (
+				'title' 	=> 'Update Artikel : '.$data['detail']['judul'],
+				'artikelkebsej'	=> $this->artikelkebsej_model->detailArtikelKebSej(),
+				'detail'	=> $this->artikelkebsej_model->detailArtikelKebSej($idArtikelKS),
+				'isi'		=> 'admin/ArtikelKebsej/viewEditArtikelKebSej'
+				);
+			$this->load->view('admin/ArtikelKebsej/viewEditArtikelKebSej', $data);
+			// Jika tidak terjadi error maka artikel akan diupdate
+		}else{
+			$data = array (
+				'idArtikelKS'		=> $this->input->post('idArtikelKS'),
+				'judul'				=> $this->input->post('judul'),
+				'ringkasan'			=> $this->input->post('ringkasan'),
+				'isi'				=> $this->input->post('isi'),
+				'idUser'			=> $this->input->post('idUser')
+				);
+			
+			$this->artikelkebsej_model->updateArtikelKebSej($data);
+			redirect(base_url().'artikelkebsej/index');
+		}		
+	} 
+
 	
 	// Kode untuk menghapus artikel
 	public function hapusArtikelKebSej($idArtikelKS) {
